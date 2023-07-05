@@ -369,7 +369,7 @@ MonoBehaviour:
   m_Name: Tree Data
   m_EditorClassIdentifier: 
   _uniqueID: 173
-  materialHash: 8ee81f1e13e2d545861b2ad59c43963d-559939584
+  materialHash: 
   root:
     _uniqueID: 1
     seed: 1400
