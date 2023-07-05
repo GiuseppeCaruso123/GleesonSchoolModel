@@ -17,6 +17,8 @@ using UnityEngine.InputSystem.Utilities;
 
 public partial class @PlayerControls: IInputActionCollection2, IDisposable
 {
+    internal bool enabled;
+
     public InputActionAsset asset { get; }
     public @PlayerControls()
     {
