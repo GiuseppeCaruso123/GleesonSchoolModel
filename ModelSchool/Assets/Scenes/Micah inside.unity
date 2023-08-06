@@ -34741,7 +34741,7 @@ PrefabInstance:
     - target: {fileID: 2664098864995057252, guid: b3b4b22ce2591a5489db595c713cf1a5, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: d4d7b6feac3b7f34da6daa0c3ab06241, type: 2}
+      objectReference: {fileID: 2100000, guid: 75a7452725a8d1d41b69d19121952915, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -41616,6 +41616,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2122898022618814148, guid: 0e576ebf4b4370349b4ce7f52ba577db, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 75a7452725a8d1d41b69d19121952915, type: 2}
     - target: {fileID: 3841467805015922161, guid: 0e576ebf4b4370349b4ce7f52ba577db, type: 3}
       propertyPath: m_Name
       value: callen@Walking Variant
