@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/School.unity
     guid: 1bcea1819b6c4c247ab01c92ec592291
+  - enabled: 0
+    path: Assets/Scenes/Micah inside.unity
+    guid: 4e5662e936a6192429c5c4f09c1c7486
   m_configObjects: {}
