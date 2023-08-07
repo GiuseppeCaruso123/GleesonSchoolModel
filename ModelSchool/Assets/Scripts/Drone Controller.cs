@@ -4,126 +4,67 @@ using UnityEngine;
 
 public class DroneController : MonoBehaviour
 {
-    Rigidbody rigidbody;
-    float up_down_axis, forward_back_axis, right_left_axis;
-    float forward_back_angle = 0, right_left_angle = 0;
-    [SerializeField]
-    float speed = 1.3f, angle = 25;
-    Animator animator;
-    bool isOnGround = false;
+    Rigidbody Drone;
 
-    private void Start()
+    void Awake()
     {
-        rigidbody = GetComponent<Rigidbody>();
-        animator = GetComponent<Animator>();
+        Drone = GetComponent<Rigidbody>();
     }
 
-    private void Update()
+    void FixedUpdate()
     {
-        Controls();
-        transform.localEulerAngles = Vector3.back * right_left_angle + Vector3.right * forward_back_angle;
-       
+        MovementUpDown();
+        MovementForward();
+        Rotation();
+
+        Drone.AddRelativeForce(Vector3.up * upForce);
+        Drone.rotation = Quaternion.Euler(new Vector3(tiltAmountForward, currentYRotation, Drone.rotation.z));
     }
-
-    private void FixedUpdate()
+    public float upForce;
+    void MovementUpDown()
     {
-        rigidbody.AddRelativeForce(right_left_axis, up_down_axis, forward_back_axis);
-    }
-
-    void Controls()
-    {
-        //Up Down
-        if(Input.GetKey(KeyCode.Q))
-        {
-            up_down_axis = 10 * speed;
-            animator.SetBool("Fly", true);
-            isOnGround = false;
-        }
-        else if(Input.GetKey(KeyCode.E))
-        {
-            up_down_axis = 8;
-            animator.SetBool("Fly", false);
-        }
-        else
-        {
-            up_down_axis = 9.81f;
-            animator.SetBool("Fly", false);
-        }
-
-        //Forward Back
-        if(Input.GetKey(KeyCode.W))
-        {
-            forward_back_angle = Mathf.Lerp(forward_back_angle, angle, Time.deltaTime);
-            forward_back_axis = speed;
-            animator.SetBool("Fly", true);
-        }
-        else if(Input.GetKey(KeyCode.S))
-        {
-            forward_back_angle = Mathf.Lerp(forward_back_angle, -angle, Time.deltaTime);
-            forward_back_axis = -speed;
-            animator.SetBool("Fly", true);
-        }
-        else
-        {
-            forward_back_angle = Mathf.Lerp(forward_back_angle, 0, Time.deltaTime);
-            forward_back_axis = 0;
-        }
-
-        //Right Left
         if (Input.GetKey(KeyCode.D))
         {
-            right_left_angle = Mathf.Lerp(right_left_angle, angle, Time.deltaTime);
-            right_left_axis = speed;
-            animator.SetBool("Fly", true);
+            upForce = 20f;
         }
-        else if (Input.GetKey(KeyCode.A))
+        else if(Input.GetKey(KeyCode.A))
         {
-            right_left_angle = Mathf.Lerp(right_left_angle, -angle, Time.deltaTime);
-            right_left_axis = -speed;
-            animator.SetBool("Fly", true);
+            upForce = -20f;
         }
-        else
+        else if(!Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A))
         {
-            right_left_angle = Mathf.Lerp(right_left_angle, 0, Time.deltaTime);
-            right_left_axis = 0;
+            upForce = 8f;
         }
-
-        if(Input.GetKey(KeyCode.W) && (Input.GetKey(KeyCode.D)))
-        {
-            forward_back_angle = Mathf.Lerp(forward_back_angle, angle, Time.deltaTime);
-            right_left_angle = Mathf.Lerp(right_left_angle, angle, Time.deltaTime);
-            forward_back_axis = 0.5f * speed;
-            right_left_axis = 0.5f * speed;
-        }
-        if(Input.GetKey(KeyCode.W) && (Input.GetKey(KeyCode.A)))
-        {
-            forward_back_angle = Mathf.Lerp(forward_back_angle, angle, Time.deltaTime);
-            right_left_angle = Mathf.Lerp(right_left_angle, -angle, Time.deltaTime);
-            forward_back_axis = 0.5f * speed;
-            right_left_axis = -0.5f * speed;
-        }
-        if (Input.GetKey(KeyCode.S) && (Input.GetKey(KeyCode.D)))
-        {
-            forward_back_angle = Mathf.Lerp(forward_back_angle, -angle, Time.deltaTime);
-            right_left_angle = Mathf.Lerp(right_left_angle, angle, Time.deltaTime);
-            forward_back_axis = -0.5f * speed;
-            right_left_axis = 0.5f * speed;
-        }
-        if (Input.GetKey(KeyCode.S) && (Input.GetKey(KeyCode.A)))
-        {
-            forward_back_angle = Mathf.Lerp(forward_back_angle, -angle, Time.deltaTime);
-            right_left_angle = Mathf.Lerp(right_left_angle, -angle, Time.deltaTime);
-            forward_back_axis = -0.5f * speed;
-            right_left_axis = -0.5f * speed;
-        }
-
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private float movementForwardSpeed = 20f;
+    private float tiltAmountForward = 0f;
+    private float tiltVelocityForward;
+
+    void MovementForward()
     {
-        if(collision.gameObject.tag == "Ground")
+        if(Input.GetAxis("Vertical") != 0)
         {
-            isOnGround = true;
+            Drone.AddRelativeForce(Vector3.forward * Input.GetAxis("Vertical") * movementForwardSpeed);
+            tiltAmountForward = Mathf.SmoothDamp(tiltAmountForward, 20 * Input.GetAxis("Vertical"), ref tiltVelocityForward, 0.1f);
         }
     }
+
+    private float wantedYRotation;
+    private float currentYRotation;
+    private float rotateAmountByKeys = 2.5f;
+    private float rotationYVelocity;
+    void Rotation()
+    {
+        if(Input.GetKey(KeyCode.J))
+        {
+            wantedYRotation -= rotateAmountByKeys;
+        }
+        if(Input.GetKey(KeyCode.K))
+        {
+            wantedYRotation += rotateAmountByKeys;
+        }
+        currentYRotation = Mathf.SmoothDamp(currentYRotation, wantedYRotation, ref rotationYVelocity, 0.25f);
+    }
+
 }
