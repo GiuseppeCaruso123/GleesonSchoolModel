@@ -207,9 +207,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1697166953}
         m_TargetAssemblyTypeName: menu, Assembly-CSharp
-        m_MethodName: QuitGame
+        m_MethodName: quitGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -341,9 +341,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 102900000, guid: 1bcea1819b6c4c247ab01c92ec592291, type: 3}
+      - m_Target: {fileID: 1697166953}
         m_TargetAssemblyTypeName: menu, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: playGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1185,7 +1185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menuObj: {fileID: 474495472}
   sceneName: School
-  playButton: {fileID: 0}
+  playButton: {fileID: 84611139}
 --- !u!1 &1832519195
 GameObject:
   m_ObjectHideFlags: 0
