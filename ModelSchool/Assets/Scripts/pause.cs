@@ -43,6 +43,7 @@ public class pause : MonoBehaviour
         settingmenu.SetActive(false);
         pausemenu.SetActive(true);
     }    
+
     public void resumeGame()
     {
         toggle = false;
