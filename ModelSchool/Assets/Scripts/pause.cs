@@ -8,7 +8,7 @@ public class pause : MonoBehaviour
     public GameObject pausemenu, settingmenu;
     public string sceneName;
     public bool toggle;
-    public PlayerManager playerScript;
+        PlayerManager playerScript;
 
     void Update()
     {

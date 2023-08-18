@@ -6,6 +6,7 @@ public class PlayerManager : MonoBehaviour
 {
     InputManager inputManager;
     PlayerLocomotion playerLocomotion;
+    public GameObject pausemenu, settingmenu;
 
     private void Awake()
     {
@@ -16,10 +17,15 @@ public class PlayerManager : MonoBehaviour
     private void Update()
     {
         inputManager.HandleAllInputs();
+        if (pausemenu || settingmenu == true)
+        {
+            inputManager.enabled = false;
+        }
     }
 
     private void FixedUpdate()
     {
         playerLocomotion.HandleAllMovement();
     }
+     
 }
