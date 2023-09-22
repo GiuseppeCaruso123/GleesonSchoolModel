@@ -6,11 +6,13 @@ using UnityEngine.SceneManagement;
 public class Teleport : MonoBehaviour
 {
 
-    public int LevelIndex;
+    public string scenename;
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
-            SceneManager.LoadScene(LevelIndex);
+        if(other.CompareTag("Player"))
+        {
+            SceneManager.LoadScene(scenename);
+        }
     }
 }
