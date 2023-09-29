@@ -12,6 +12,7 @@ namespace StarterAssets
 		public Vector2 look;
 		public bool jump;
 		public bool sprint;
+		public bool zoom;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -43,6 +44,13 @@ namespace StarterAssets
 		{
 			SprintInput(value.isPressed);
 		}
+
+		public void Onzoom(InputValue value)
+		{
+			ZoomInput(value.Get<float>());
+		}
+
+
 #endif
 
 
@@ -65,6 +73,13 @@ namespace StarterAssets
 		{
 			sprint = newSprintState;
 		}
+
+		public void ZoomInput(float newZoomInput)
+		{
+			zoom = newZoomInput;
+		}
+
+
 
 		private void OnApplicationFocus(bool hasFocus)
 		{

@@ -110,6 +110,22 @@ namespace StarterAssets
 
         private bool _hasAnimator;
 
+        public CinemachineVirtualCamera cinemachineVirtualCamera;
+
+        //zooming in and out variables
+        public float zoomMinDistance = 1.5f;
+        
+        public float zoomMaxDistance = 6f;
+
+        public float zoomSpeed = 0.02f;
+
+        private float zoomFactor = 0.5f;
+
+        private float cameraDistance = 4f;
+
+
+
+
         private bool IsCurrentDeviceMouse
         {
             get
@@ -189,6 +205,14 @@ namespace StarterAssets
                 _animator.SetBool(_animIDGrounded, Grounded);
             }
         }
+
+
+            private void CameraZoom()
+            {
+                this.zoom -= _input.zoom / 240f * this.zoomFactor;
+            }
+
+
 
         private void CameraRotation()
         {
