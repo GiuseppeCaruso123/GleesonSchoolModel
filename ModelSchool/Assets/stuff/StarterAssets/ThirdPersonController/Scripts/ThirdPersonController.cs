@@ -110,7 +110,7 @@ namespace StarterAssets
 
         private bool _hasAnimator;
 
-        public CinemachineVirtualCamera cinemachineVirtualCamera;
+        public CinemachineVirtualCamera CinemachineVirtualCamera;
 
         //zooming in and out variables
         public float zoomMinDistance = 1.5f;
