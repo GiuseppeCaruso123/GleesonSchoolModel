@@ -110,22 +110,22 @@ namespace StarterAssets
 
         private bool _hasAnimator;
 
-        public CinemachineVirtualCamera CinemachineVirtualCamera;
+       //public CinemachineVirtualCamera CinemachineVirtualCamera;
 
         //zooming in and out variables
-        public float zoomMinDistance = 1.5f;
+       // public float zoomMinDistance = 1.5f;
         
-        public float zoomMaxDistance = 6f;
+       // public float zoomMaxDistance = 6f;
 
-        public float zoomSpeed = 0.02f;
+        //public float zoomSpeed = 0.02f;
 
-        private float zoomFactor = 0.5f;
+        //private float zoomFactor = 0.5f;
 
-        private float zoom = af;
+       // private float zoom = af;
 
-        private float cameraDistance = 4f;
+       // private float cameraDistance = 4f;
 
-        private float zoomVelocity = of;
+        //private float zoomVelocity = of;
 
 
         private bool IsCurrentDeviceMouse
@@ -169,7 +169,7 @@ namespace StarterAssets
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
 
-            this.zoomVelocity = of;
+            //this.zoomVelocity = of;
         }
 
         private void Update()
@@ -184,7 +184,7 @@ namespace StarterAssets
         private void LateUpdate()
         {
             CameraRotation();
-            CameraZoom();
+            //CameraZoom();
         }
 
         private void AssignAnimationIDs()
@@ -212,14 +212,14 @@ namespace StarterAssets
         }
 
 
-            private void CameraZoom()
-            {
-                this.zoom -= _input.zoom / 240f * this.zoomFactor;
-                this.zoom = Mathf.Clamp(this.zoom, this.zoomMinDistance, this.zoomMaxDistance);
-                this.cameraDistance = Mathf.SmoothDamp(this.cameraDistance, this.zoom, ref this.zoomVelocity, FallTimeout.unscaledTime * this.zoomSpeed);
+            //private void CameraZoom()
+            //{
+               // this.zoom -= _input.zoom / 240f * this.zoomFactor;
+               // this.zoom = Mathf.Clamp(this.zoom, this.zoomMinDistance, this.zoomMaxDistance);
+               // this.cameraDistance = Mathf.SmoothDamp(this.cameraDistance, this.zoom, ref this.zoomVelocity, FallTimeout.unscaledTime * this.zoomSpeed);
 
-            this.cinemachineVirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().cameraDistance = this.cameraDistance;
-            }
+           // this.cinemachineVirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().cameraDistance = this.cameraDistance;
+            //}
 
 
 
